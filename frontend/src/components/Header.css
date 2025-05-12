@@ -1,0 +1,33 @@
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
+}
+
+.profile-circle img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.menu-toggle {
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.hamburger-icon {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  margin: 3px 0;
+}

@@ -1,0 +1,222 @@
+/* Contenedor principal */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  /* Sidebar que ocupa espacio real cuando está abierto */
+  .sidebar {
+    width: 0;
+    background-color: #B6B1B1;
+    color: #333;
+    overflow-x: hidden;
+    transition: width 0.3s ease;
+    white-space: nowrap;
+    padding: 20px 0;
+  }
+  
+  .sidebar.open {
+    width: 250px;
+    border-radius: 0px 30px 30px 0px;
+  }
+  
+  .sidebar h3 {
+    padding-left: 20px;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 15px 20px;
+  }
+  
+  .sidebar ul li a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .sidebar ul li a:hover {
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 20px;
+  }
+  
+  /* Contenido general, incluyendo el header y tabla */
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+  
+  /* Parte superior con hamburguesa y título */
+  .menu-and-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  /* Botón hamburguesa */
+  .menu-toggle {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .hamburger-icon {
+    width: 30px;
+    height: 4px;
+    background-color: #333;
+    border-radius: 5px;
+  }
+  
+  /* Tabla principal */
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-x: auto;
+  }
+  
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+  }
+  
+  .user-table th, .user-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .user-table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .user-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .user-table tr:hover {
+    background-color: #ddd;
+  }
+  
+  .logout-button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+  }
+
+  .profile-container {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .profile-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #555;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .profile-dropdown {
+    margin-top: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    width: 150px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+  }
+  
+  .profile-dropdown img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .profile-dropdown p {
+    margin: 10px 0 0;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .profile-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: auto;
+    cursor: pointer;
+  }
+  
+  .profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .user-info-box {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: #fff;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    z-index: 10;
+  }
+  
+  .user-info-box {
+    width: 250px;
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .user-info-box h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .user-info-box input[type="file"] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .user-info-box button {
+    width: 100%;
+    padding: 8px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .user-info-box button:hover {
+    background-color: #0056b3;
+  }
+  
