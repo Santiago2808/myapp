@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from '../config/axiosConfig';
 import Sidebar from './Sidebar';
 
@@ -7,6 +7,7 @@ export default function Layout({ children, onLogout }) {
   const [showUserInfo, setShowUserInfo] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [profilePic, setProfilePic] = useState('default.png');
+  const userInfoRef = useRef(null);
 
   useEffect(() => {
     const fetchProfilePic = async () => {
@@ -20,6 +21,27 @@ export default function Layout({ children, onLogout }) {
 
     fetchProfilePic();
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        userInfoRef.current &&
+        !userInfoRef.current.contains(event.target)
+      ) {
+        setShowUserInfo(false);
+      }
+    };
+
+    if (showUserInfo) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showUserInfo]);
 
   const toggleSidebar = () => setIsSidebarOpen(prev => !prev);
   const toggleUserInfo = () => setShowUserInfo(prev => !prev);
@@ -53,8 +75,16 @@ export default function Layout({ children, onLogout }) {
   return (
     <div className="layout" style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       {/* Header */}
-      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '60px', backgroundColor: '#fff', color: '#333', display: 'flex', alignItems: 'center', padding: '0 1rem', zIndex: 1000 }}>
-        <button onClick={toggleSidebar} style={{ marginRight: '1rem', background: 'none', border: 'none', color: '#333', fontSize: '1.9rem' }}>
+      <div style={{
+        position: 'fixed', top: 0, left: 0, right: 0,
+        height: '60px', backgroundColor: '#fff', color: '#333',
+        display: 'flex', alignItems: 'center', padding: '0 1rem',
+        zIndex: 1000
+      }}>
+        <button onClick={toggleSidebar} style={{
+          marginRight: '1rem', background: 'none',
+          border: 'none', color: '#333', fontSize: '1.9rem'
+        }}>
           ☰
         </button>
 
@@ -73,7 +103,9 @@ export default function Layout({ children, onLogout }) {
             }}
           />
           {showUserInfo && (
-            <div style={{
+            <div 
+            ref={userInfoRef} // 👈 Ref aplicada aquí
+            style={{
               position: 'absolute',
               right: 0,
               top: '110%',
@@ -83,7 +115,8 @@ export default function Layout({ children, onLogout }) {
               borderRadius: '8px',
               boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
               zIndex: 999,
-              minWidth: '200px'
+              width: '250px',
+              overflowX: 'hidden'
             }}>
               <img
                 src={profileImage}
@@ -96,11 +129,21 @@ export default function Layout({ children, onLogout }) {
                   marginBottom: '0.5rem'
                 }}
               />
-              <input type="file" accept="image/*" onChange={handleFileChange} />
-              <button onClick={handleUpload} style={{ marginTop: '0.5rem', width: '100%', padding: '0.4rem', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+              <input type="file" accept="image/*" onChange={handleFileChange} style={{ width: '100%' }} />
+              <button onClick={handleUpload} style={{
+                marginTop: '0.5rem', width: '100%',
+                padding: '0.4rem', backgroundColor: '#007bff',
+                color: '#fff', border: 'none',
+                borderRadius: '4px', cursor: 'pointer'
+              }}>
                 Actualizar foto
               </button>
-              <button onClick={onLogout} style={{ marginTop: '0.5rem', width: '100%', padding: '0.4rem', backgroundColor: '#dc3545', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+              <button onClick={onLogout} style={{
+                marginTop: '0.5rem', width: '100%',
+                padding: '0.4rem', backgroundColor: '#dc3545',
+                color: '#fff', border: 'none',
+                borderRadius: '4px', cursor: 'pointer'
+              }}>
                 Cerrar sesión
               </button>
             </div>

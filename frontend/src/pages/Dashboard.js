@@ -103,9 +103,23 @@ export default function Dashboard({ user, onLogout }) {
       <div className="content" style={{ marginTop: '60px' }}>
         {showUserInfo && (
           <div className="user-info-box">
+            <img
+                src={`http://localhost/myapp/backend/uploads/${profilePic}`}
+                alt="Foto grande"
+                style={{
+                  width: 80,
+                  height: 80,
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  marginBottom: '0.5rem'
+                }}
+              />
             <h4>{user?.name}</h4>
             <input type="file" accept="image/*" onChange={handleFileChange} />
             <button onClick={handleUpload}>Actualizar foto</button>
+            <button onClick={handleLogout} style={{ marginTop: '0.5rem', width: '100%', padding: '0.4rem', backgroundColor: '#dc3545', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+                Cerrar sesión
+              </button>
           </div>
         )}
 
