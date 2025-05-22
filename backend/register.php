@@ -2,7 +2,6 @@
 ini_set('session.cookie_samesite', 'None');
 ini_set('session.cookie_secure', 'Off'); // Si estás trabajando en http (localhost), "Off"
 
-
 session_start(); // ✅ Esto faltaba
 
 header('Access-Control-Allow-Origin: http://localhost:3000');
@@ -16,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Conexión a la base de datos
-$conn = new mysqli("localhost", "root", "superadmin2808", "myapp_db");
+$conn = new mysqli("localhost", "root", "", "myapp_db");
 
 // Verificar conexión
 if ($conn->connect_error) {
@@ -25,7 +24,8 @@ if ($conn->connect_error) {
 }
 
 // Leer datos JSON enviados por React
-$data = json_decode(file_get_contents("php://input"));
+$raw = file_get_contents("php://input");
+$data = json_decode($raw);
 
 // Validar que se hayan recibido datos
 if (!$data || !isset($data->name) || !isset($data->email) || !isset($data->password)) {
